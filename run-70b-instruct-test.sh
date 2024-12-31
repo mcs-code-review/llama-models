@@ -1,7 +1,7 @@
 #!/bin/bash
 # Partition for the job:
-##SBATCH --partition=deeplearn
-#SBATCH --partition=gpu-a100
+#SBATCH --partition=deeplearn
+##SBATCH --partition=gpu-a100
 
 # Multithreaded (SMP) job: must run on one node 
 #SBATCH --nodes=1
@@ -19,8 +19,8 @@
 # Number of GPUs requested per node:
 #SBATCH --gres=gpu:4
 # Slurm QoS:
-##SBATCH --qos=gpgpudeeplearn
-##SBATCH --constraint=dlg5
+#SBATCH --qos=gpgpudeeplearn
+#SBATCH --constraint=dlg5
 
 # Requested memory per node:
 #SBATCH --mem=128G
@@ -59,23 +59,20 @@ echo "Loaded modules:"
 echo "$(module list)"
 
 # The job command(s):
-source ~/venvs/codellama/bin/activate
+source ~/venvs/deepseekcoder/bin/activate
+
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
 
 ### CodeReviewer ###
 
 python code_review_instruction_parallel.py \
     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-    --conf_path ../config/zero-shot/llama-31-70B-instruct-cr.json \
+    --conf_path ../config/llama-models-test-zero-shot.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 512 \
     --tp_size 4 \
     --debug True
-
-# CHECKPOINT_DIR=$PWD/meta-llama/Llama-3.1-70B-Instruct/original
-# NGPUS=2
-
-# PYTHONPATH=$(git rev-parse --show-toplevel) torchrun --nproc_per_node=$NGPUS models/scripts/example_chat_completion.py $CHECKPOINT_DIR --model_parallel_size $NGPUS
 
 ##DO NOT ADD/EDIT BEYOND THIS LINE##
 ##Job monitor command to list the resource usage
