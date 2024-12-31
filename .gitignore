@@ -3,3 +3,5 @@ dist
 *.egg-info
 build
 .DS_Store
+meta-llama
+logs
