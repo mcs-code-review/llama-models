@@ -58,7 +58,9 @@ echo "Loaded modules:"
 echo "$(module list)"
 
 # The job command(s):
-source ~/venvs/codellama/bin/activate
+source ~/venvs/deepseekcoder/bin/activate
+
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
 
 ### CodeReviewer ###
 

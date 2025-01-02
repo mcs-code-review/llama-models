@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 
 # The name of the job:
-#SBATCH --job-name="33b-instruct-few-shot"
+#SBATCH --job-name="70b-instruct-few-shot"
 
 # The project ID which this job should run under:
 #SBATCH --account="punim2247"
@@ -35,11 +35,11 @@
 #SBATCH --mail-type=END
 
 # The maximum running time of the job in days-hours:mins:sec
-#SBATCH --time=0-24:0:00
+#SBATCH --time=0-72:0:00
 
 # Standard output and error log
-#SBATCH -o logs/33b-instruct-few-shot-%N.%j.out # STDOUT
-#SBATCH -e logs/33b-instruct-few-shot-%N.%j.err # STDERR
+#SBATCH -o logs/70b-instruct-few-shot-%N.%j.out # STDOUT
+#SBATCH -e logs/70b-instruct-few-shot-%N.%j.err # STDERR
 
 # Run the job from the directory where it was launched (default)
 
@@ -60,39 +60,41 @@ echo "$(module list)"
 # The job command(s):
 source ~/venvs/deepseekcoder/bin/activate
 
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
+
 ### CodeReviewer ###
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-cr-bm25-1.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-cr-bm25-1.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-cr-bm25-2.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-cr-bm25-2.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-cr-bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-cr-bm25-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-cr-bm25-4.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-cr-bm25-4.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
@@ -101,18 +103,47 @@ python code_review_instruction_parallel.py \
 ### CodeReviewer with Ownership ###
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot-with-ownership/deepseek-coder-33b-instruct-cr-pkg_aco_bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-with-ownership/llama-31-70B-instruct-cr-pkg_aco_bm25-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot-with-ownership/deepseek-coder-33b-instruct-cr-pkg_rso_bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-with-ownership/llama-31-70B-instruct-cr-pkg_rso_bm25-3.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+### CodeReviewer DL ###
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-cr-faiss-1.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-cr-faiss-2.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-cr-faiss-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
@@ -121,36 +152,36 @@ python code_review_instruction_parallel.py \
 # ### CodeReviewerNew ###
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-crn-bm25-1.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-crn-bm25-1.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-crn-bm25-2.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-crn-bm25-2.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-crn-bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-crn-bm25-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_CodeReviewerNewreview_instruction_few_shot.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot/deepseek-coder-33b-instruct-crn-bm25-4.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot/llama-31-70B-instruct-crn-bm25-4.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
@@ -159,18 +190,47 @@ python code_CodeReviewerNewreview_instruction_few_shot.py \
 ### CodeReviewerNew with Ownership ###
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot-with-ownership/deepseek-coder-33b-instruct-crn-pkg_aco_bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-with-ownership/llama-31-70B-instruct-crn-pkg_aco_bm25-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
     --debug False
 
 python code_review_instruction_parallel.py \
-    --ckpt_dir ./ckpt/deepseek-coder-33b-instruct \
-    --tokenizer_path ./ckpt/deepseek-coder-33b-instruct \
-    --conf_path ../config/few-shot-with-ownership/deepseek-coder-33b-instruct-crn-pkg_rso_bm25-3.json \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-with-ownership/llama-31-70B-instruct-crn-pkg_rso_bm25-3.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+### CodeReviewer DL ###
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-crn-faiss-1.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-crn-faiss-2.json \
+    --temperature 0.0 --top_p 0.95 \
+    --max_new_tokens 2048 \
+    --tp_size 4 \
+    --debug False
+
+python code_review_instruction_parallel.py \
+    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+    --conf_path ../config/few-shot-dl/llama-31-70B-instruct-crn-faiss-3.json \
     --temperature 0.0 --top_p 0.95 \
     --max_new_tokens 2048 \
     --tp_size 4 \
