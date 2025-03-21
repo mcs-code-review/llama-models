@@ -198,7 +198,7 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 #     --tp_size 4 \
 #     --debug False
 
-python code_CodeReviewerNewreview_instruction_few_shot.py \
+python code_review_instruction_parallel.py \
     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
     --conf_path ../config/few-shot-ir/llama-31-70B-instruct-crn-bm25-4.json \
