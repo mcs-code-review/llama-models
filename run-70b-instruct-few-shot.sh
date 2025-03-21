@@ -154,7 +154,7 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 # python code_review_instruction_parallel.py \
 #     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
 #     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_aco_bm25-3.json \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_aco_faiss-3.json \
 #     --temperature 0.0 --top_p 0.95 \
 #     --max_new_tokens 2048 \
 #     --tp_size 4 \
@@ -163,7 +163,7 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 # python code_review_instruction_parallel.py \
 #     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
 #     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_rso_bm25-3.json \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_rso_faiss-3.json \
 #     --temperature 0.0 --top_p 0.95 \
 #     --max_new_tokens 2048 \
 #     --tp_size 4 \
@@ -261,7 +261,7 @@ python code_review_instruction_parallel.py \
 # python code_review_instruction_parallel.py \
 #     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
 #     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_aco_bm25-3.json \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_aco_faiss-3.json \
 #     --temperature 0.0 --top_p 0.95 \
 #     --max_new_tokens 2048 \
 #     --tp_size 4 \
@@ -270,7 +270,7 @@ python code_review_instruction_parallel.py \
 # python code_review_instruction_parallel.py \
 #     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
 #     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_rso_bm25-3.json \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_rso_faiss-3.json \
 #     --temperature 0.0 --top_p 0.95 \
 #     --max_new_tokens 2048 \
 #     --tp_size 4 \
