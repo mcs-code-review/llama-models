@@ -35,7 +35,7 @@
 #SBATCH --mail-type=END
 
 # The maximum running time of the job in days-hours:mins:sec
-#SBATCH --time=0-12:0:00
+#SBATCH --time=0-24:0:00
 
 # Standard output and error log
 #SBATCH -o logs/70b-instruct-few-shot-%N.%j.out # STDOUT
@@ -160,14 +160,14 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 #     --tp_size 4 \
 #     --debug False
 
-python code_review_instruction_parallel.py \
-    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
-    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-    --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_rso_faiss-3.json \
-    --temperature 0.0 --top_p 0.95 \
-    --max_new_tokens 2048 \
-    --tp_size 4 \
-    --debug False
+# python code_review_instruction_parallel.py \
+#     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+#     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-cr-pkg_rso_faiss-3.json \
+#     --temperature 0.0 --top_p 0.95 \
+#     --max_new_tokens 2048 \
+#     --tp_size 4 \
+#     --debug False
 
 # ### CodeReviewerNew IR ###
 
@@ -258,23 +258,23 @@ python code_review_instruction_parallel.py \
 
 ### CodeReviewerNew with Ownership DL ###
 
-python code_review_instruction_parallel.py \
-    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
-    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-    --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_aco_faiss-3.json \
-    --temperature 0.0 --top_p 0.95 \
-    --max_new_tokens 2048 \
-    --tp_size 4 \
-    --debug False
+# python code_review_instruction_parallel.py \
+#     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+#     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_aco_faiss-3.json \
+#     --temperature 0.0 --top_p 0.95 \
+#     --max_new_tokens 2048 \
+#     --tp_size 4 \
+#     --debug False
 
-python code_review_instruction_parallel.py \
-    --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
-    --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
-    --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_rso_faiss-3.json \
-    --temperature 0.0 --top_p 0.95 \
-    --max_new_tokens 2048 \
-    --tp_size 4 \
-    --debug False
+# python code_review_instruction_parallel.py \
+#     --ckpt_dir ./meta-llama/Llama-3.1-70B-Instruct \
+#     --tokenizer_path ./meta-llama/Llama-3.1-70B-Instruct \
+#     --conf_path ../config/few-shot-dl-with-ownership/llama-31-70B-instruct-crn-pkg_rso_faiss-3.json \
+#     --temperature 0.0 --top_p 0.95 \
+#     --max_new_tokens 2048 \
+#     --tp_size 4 \
+#     --debug False
 
 ##DO NOT ADD/EDIT BEYOND THIS LINE##
 ##Job monitor command to list the resource usage
